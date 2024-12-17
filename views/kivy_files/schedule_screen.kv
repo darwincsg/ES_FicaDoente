@@ -1,0 +1,89 @@
+<StyledSpinner@Spinner>:
+    background_normal: ''
+    background_color: 0, 0, 0.5, 1  # Dark blue
+    color: 1, 1, 1, 1  # White text
+    canvas.before:
+        Color:
+            rgba: self.background_color
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [10]
+
+<ScheduleScreen>:
+    name: "schedule_screen"
+    BoxLayout:
+        orientation: 'vertical'
+        padding: dp(20)
+        spacing: dp(10)
+
+        # Back Button and Title
+        BoxLayout:
+            size_hint_y: None
+            height: dp(50)
+            Button:
+                text: "< Back"
+                size_hint_x: None
+                width: dp(80)
+                background_normal: ''
+                background_color: 0.8, 0.9, 1, 1
+                color: 0, 0, 0, 1
+                on_release: root.go_back()
+            Label:
+                text: "Schedule"
+                font_size: '20sp'
+                bold: True
+                halign: 'center'
+
+        # Patient and Date Info
+        Label:
+            id: patient_info
+            text: "Patient: "
+            font_size: '18sp'
+            halign: 'center'
+            valign: 'middle'
+
+        # Date of Birth Section
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: dp(60)
+            BoxLayout:
+                spacing: dp(10)
+                StyledSpinner:
+                    id: day_spinner
+                    text: "30"
+                    values: [str(i) for i in range(1, 32)]
+                StyledSpinner:
+                    id: month_spinner
+                    text: "01"
+                    values: [str(i) for i in range(1, 13)]
+                StyledSpinner:
+                    id: year_spinner
+                    text: "1991"
+                    values: [str(i) for i in range(1950, 2024)]
+
+        # Doctor Dropdown (Optional)
+        Label:
+            text: "Doctor: Dwight Schrute"
+            font_size: '16sp'
+            halign: 'center'
+
+        # Time Slots
+        ScrollView:
+            GridLayout:
+                id: time_slot_grid
+                cols: 3
+                spacing: dp(10)
+                size_hint_y: None
+                height: self.minimum_height
+
+        # Confirm Button
+        Button:
+            text: "Confirm"
+            size_hint_y: None
+            height: dp(50)
+            background_normal: ''
+            background_color: 0.2, 0.6, 0.8, 1  # Light blue
+            color: 1, 1, 1, 1  # White text
+            on_release: root.confirm_appointment()

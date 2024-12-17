@@ -1,0 +1,38 @@
+<LoginScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: dp(10)
+        padding: dp(20)
+        
+        Label:
+            text: "LOGIN"
+            font_size: '24sp'
+            halign: 'center'
+        
+        TextInput:
+            id: email_input
+            hint_text: "Email"
+            multiline: False
+        
+        TextInput:
+            id: password_input
+            hint_text: "Password"
+            password: True
+            multiline: False
+        
+        Button:
+            text: "Forgot Password?"
+            size_hint_y: None
+            height: dp(40)
+            on_release: root.show_forgot_password_screen()
+
+        Button:
+            text: "LOGIN"
+            size_hint_y: None
+            height: dp(50)
+            on_release: root.attempt_login(email_input.text, password_input.text)
+        
+        Label:
+            id: login_message
+            text: ""
+            color: (1,0,0,1)  # Red for error message

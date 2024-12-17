@@ -1,0 +1,80 @@
+<MainScreen>:
+    name: "main_screen"
+    BoxLayout:
+        orientation: 'vertical'
+        canvas.before:
+            Color:
+                rgba: 1,1,1,1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        # Top Section: Profile and Welcome
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_y: 0.3
+            canvas.before:
+                Color:
+                    rgba: 0.4, 0.7, 1, 1  # Light blue background
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            Image:
+                source: './assets/ryan-2.jpg'  # Provide a real image path
+                size_hint_x: 0.3
+                allow_stretch: True
+                keep_ratio: True
+
+            BoxLayout:
+                orientation: 'vertical'
+                padding: dp(1)
+                Label:
+                    text: "Welcome"
+                    font_size: '24sp'
+                    halign: 'left'
+                    valign: 'middle'
+                Label:
+                    text: "Ryan"
+                    font_size: '24sp'
+                    halign: 'left'
+                    valign: 'middle'
+
+        # Middle Section: Buttons
+        BoxLayout:
+            orientation: 'vertical'
+            spacing: dp(10)
+            padding: dp(20)
+            size_hint_y: 0.6
+
+            Button:
+                text: "Search"
+                size_hint_y: None
+                height: dp(50)
+                background_color: (0.8,0.9,1,1)
+                on_release: root.show_search_patient()
+                # Add on_release actions as needed
+
+            Button:
+                text: "Add"
+                size_hint_y: None
+                height: dp(50)
+                background_color: (0.8,0.9,1,1)
+                # Add on_release actions as needed
+
+        Button:
+            size_hint: None, None
+            size: dp(40), dp(40)
+            pos_hint: {'right':1.0, 'y':0.0}
+            background_normal: ''
+            background_down: ''
+            background_color: (0,0,0,0)
+
+            Image:
+                source: './assets/settings.png'
+                size_hint: None,None
+                allow_stretch: False
+                keep_ratio: True
+                size: dp(40),dp(40)
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y

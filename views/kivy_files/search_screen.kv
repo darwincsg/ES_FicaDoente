@@ -1,0 +1,144 @@
+# Custom Button for Results
+<ResultButton@Button>:
+    background_normal: ''
+    background_color: 0.8, 1, 1, 1  # Light blue
+    color: 0, 0, 0, 1  # Black text
+    size_hint_y: None
+    height: dp(50)
+    canvas.before:
+        Color:
+            rgba: self.background_color
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [10]
+
+# Custom Spinner
+<StyledSpinner@Spinner>:
+    background_normal: ''
+    background_color: 0, 0, 0.5, 1  # Dark blue
+    color: 1, 1, 1, 1  # White text
+    canvas.before:
+        Color:
+            rgba: self.background_color
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [10]
+
+# Custom TextInput
+<StyledTextInput@TextInput>:
+    background_normal: ''
+    background_active: ''
+    foreground_color: 0, 0, 0, 1  # Black text
+    hint_text_color: 0, 0, 0, 0.5  # Grey hint text
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1  # White background
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [10]
+
+<SearchScreen>:
+    name: "search_screen"
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: dp(10)
+        padding: dp(20)
+
+        # Back Button and Title
+        BoxLayout:
+            size_hint_y: None
+            height: dp(50)
+            Button:
+                text: "<"
+                size_hint_x: None
+                width: dp(50)
+                background_normal: ''
+                background_color: 0.8, 0.9, 1, 1
+                color: 0, 0, 0, 1
+                canvas.before:
+                    Color:
+                        rgba: 0.8, 0.9, 1, 1
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        radius: [10]
+                on_release: root.go_back()
+            Label:
+                text: "Search"
+                font_size: '24sp'
+                halign: 'center'
+                valign: 'middle'
+
+        # Date of Birth Section
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: dp(60)
+            Label:
+                text: "Date of Birth:"
+                font_size: '18sp'
+                halign: 'left'
+                valign: 'middle'
+                size_hint_x: 0.4
+            BoxLayout:
+                spacing: dp(10)
+                StyledSpinner:
+                    id: day_spinner
+                    text: "30"
+                    values: [str(i) for i in range(1, 32)]
+                StyledSpinner:
+                    id: month_spinner
+                    text: "01"
+                    values: [str(i) for i in range(1, 13)]
+                StyledSpinner:
+                    id: year_spinner
+                    text: "1991"
+                    values: [str(i) for i in range(1950, 2024)]
+
+        # Patient Name Input Section
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: dp(60)
+            Label:
+                text: "Patient's name"
+                font_size: '18sp'
+                halign: 'left'
+                valign: 'middle'
+                size_hint_x: 0.4
+            BoxLayout:
+                spacing: dp(10)
+                TextInput:
+                    id: patient_name_input
+                    hint_text: "Enter name"
+                    multiline: False
+                    size_hint_y: None
+                    height: dp(40)
+                Button:
+                    text: "Search"
+                    background_normal: ''
+                    background_color: 0.8, 0.9, 1, 1
+                    color: 0, 0, 0, 1
+                    size_hint_x: None
+                    width: dp(50)
+                    canvas.before:
+                        Color:
+                            rgba: 0.8, 0.9, 1, 1
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.size
+                            radius: [10]
+                    on_release: root.perform_search(patient_name_input.text,day_spinner.text,month_spinner.text,year_spinner.text)
+
+        # Results Section
+        ScrollView:
+            BoxLayout:
+                id: results_container
+                orientation: 'vertical'
+                spacing: dp(10)
+                padding: dp(10)
+                size_hint_y: None
+                height: self.minimum_height

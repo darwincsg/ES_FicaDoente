@@ -1,0 +1,99 @@
+<PatientDetailScreen>:
+    name: "patient_detail_screen"
+    BoxLayout:
+        orientation: 'vertical'
+        padding: dp(20)
+        spacing: dp(10)
+
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, 1  # White background
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        BoxLayout:
+            size_hint_y: None
+            height: dp(50)
+
+            Button:
+                text: "< Back"
+                size_hint_x: None
+                width: dp(100)
+                background_normal: ''
+                background_color: 0.8, 0.9, 1, 1
+                color: 0, 0, 0, 1  # Dark text
+                on_release: root.go_back()
+
+        Label:
+            id: patient_name
+            text: "Name: "
+            font_size: '24sp'
+            bold: True
+            color: 0, 0, 0, 1
+
+        Label:
+            id: patient_doctor
+            text: "Doctor: "
+            font_size: '18sp'
+            color: 0, 0, 0, 1
+
+        Label:
+            id: patient_gender
+            text: "Gender: "
+            font_size: '18sp'
+            color: 0, 0, 0, 1
+
+        Label:
+            id: patient_dob
+            text: "Date of Birth: "
+            font_size: '18sp'
+            color: 0, 0, 0, 1
+
+        Label:
+            id: patient_address
+            text: "Address: "
+            font_size: '18sp'
+            color: 0, 0, 0, 1
+
+        Label:
+            id: patient_phone
+            text: "Phone: "
+            font_size: '18sp'
+            color: 0, 0, 0, 1
+
+        Label:
+            id: patient_email
+            text: "Email: "
+            font_size: '18sp'
+            color: 0, 0, 0, 1
+
+        Label:
+            id: patient_healthcare
+            text: "Healthcare ID: "
+            font_size: '18sp'
+            color: 0, 0, 0, 1
+
+        Button:
+            text: "Edit"
+            size_hint_y: None
+            height: dp(50)
+            background_normal: ''
+            background_color: 0.8, 0.9, 1, 1
+            color: 0, 0, 0, 1
+        Button:
+            text: "Schedule"
+            size_hint_y: None
+            height: dp(50)
+            background_normal: ''
+            background_color: 0.8, 0.9, 1, 1
+            color: 0, 0, 0, 1
+            on_release: root.go_to_schedule(patient_name.text) 
+
+        Button:
+            text: "Upcoming Appointments"
+            size_hint_y: None
+            height: dp(50)
+            background_normal: ''
+            background_color: 0.8, 0.9, 1, 1
+            color: 0, 0, 0, 1
